@@ -1,14 +1,12 @@
-import numpy as np
 import pandas as pd
-import sns as sns
+import seaborn as sns
+import warnings
 
 from matplotlib import pyplot as plt
 from sklearn.metrics import confusion_matrix, classification_report
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.tree import DecisionTreeClassifier
-
-import warnings
 
 warnings.filterwarnings("ignore")
 
