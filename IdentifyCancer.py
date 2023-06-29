@@ -1,12 +1,15 @@
 import pandas as pd
-import seaborn as sns
 import warnings
 
-from matplotlib import pyplot as plt
 from sklearn.metrics import confusion_matrix, classification_report
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.tree import DecisionTreeClassifier
+from sklearn.datasets import load_iris
+from sklearn.tree import export_text
+
+# Load the Iris dataset
+iris = load_iris()
 
 warnings.filterwarnings("ignore")
 
@@ -87,7 +90,8 @@ for m in model:
     print(f'Precision: {precision}')
     print(f'Recall   : {recall}')
     print(f'F1 score : {f1score}')
-    print(f'Specificity : {specificity}') # calcula a percentagem de negativos bem identificados de todos os negativos existentes
+    print(
+        f'Specificity : {specificity}')  # calcula a percentagem de negativos bem identificados de todos os negativos existentes
     print("")
     print(f'Classification Report: \n{classification_report(predictions, y_test)}\n')
     print("")
@@ -101,3 +105,6 @@ for m in model:
     print("")
     print("")
     print("")
+
+tree_rules = export_text(model, feature_names=list(X.columns))
+print(tree_rules)
