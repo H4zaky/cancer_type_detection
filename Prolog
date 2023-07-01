@@ -1,0 +1,18 @@
+%amostra(X, CPW, AW, TW).
+amostra(1, 0.111, 0.14, -0.9).
+
+%diagnostico(ID, D) :-
+%    amostra(ID, CPW, AW, TW),
+%    (CPW =< 0.448,
+%    AW > 0.137,
+%    TW =< -0.821
+%    ->  D = "M"
+%    ;   D = "B").
+
+diagnostico(ID, "M") :-
+    amostra(ID, CPW, AW, TW),
+    CPW =< 0.448,
+    AW > 0.137,
+    TW =< -0.821, !.
+
+diagnostico(_, "B").
