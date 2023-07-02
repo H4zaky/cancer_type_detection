@@ -1,18 +1,65 @@
-%amostra(X, CPW, AW, TW).
-amostra(1, 0.111, 0.14, -0.9).
+%amostra(ID, CPW, AW, TW).
+amostra(1, 0.448, 0.137, -0.821).
 
-%diagnostico(ID, D) :-
-%    amostra(ID, CPW, AW, TW),
-%    (CPW =< 0.448,
-%    AW > 0.137,
-%    TW =< -0.821
-%    ->  D = "M"
-%    ;   D = "B").
+%amostra(ID, CPW, AW, PW, TS, CS, PM).
+amostra(2, 0.448, 0.137, 0.04, -0.522, -0.429, 0.186).
 
-diagnostico(ID, "M") :-
+%amostra(ID, CPW, AW, PW, TS, PS, RW).
+amostra(3, 0.448, 0.137, 0.04, -0.522, -0.072, 0.124).
+
+diagnostico1(ID, D) :- 
     amostra(ID, CPW, AW, TW),
     CPW =< 0.448,
-    AW > 0.137,
-    TW =< -0.821, !.
+    AW =< 0.137,
+    TW =< -0.821,
+    D = 'B'.
+ 
+diagnostico1(_, D) :-
+    D = 'M'.
 
-diagnostico(_, "B").
+diagnostico2(ID, D) :-
+    amostra(ID, CPW, AW, PW, TS, CS, PM),
+    CPW =< 0.448,
+    AW =< 0.137,
+    PW =< 0.04,
+    TS =< -0.522,
+    CS =< -0.429,
+    PM =< 0.186,
+    D = 'M'.
+
+diagnostico2(_, D) :-
+    D = 'B'.
+
+diagnostico3(ID, D) :-
+    amostra(ID, CPW, AW, PW, TS, PS, RW),
+    (
+        CPW =< 0.448,
+        AW =< 0.137,
+        PW =< 0.04,
+        TS =< -0.522,
+        (
+            PS > -0.072 ->
+            D = 'M'
+        ;
+            (
+                RW =< 0.124 ->
+                D = 'B'
+            ;
+                D = 'M'
+            )
+        )
+    ;
+        D = 'M'
+    ).
+
+
+
+
+
+
+    
+    
+	
+    
+
+
