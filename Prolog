@@ -24,3 +24,17 @@ diagnostico(ID, D) :-
     ;   
     	D = 'M'
     ).
+
+diagnostico(ID, D) :-
+    %amostra(ID, CPW, _, RW, _, _, _, SW, _, _, TM, _, _, SS, _),
+    amostra(ID, CPW, _, RW, _, _, _, SW, _, _, _, _, _, _, _),
+    (  
+    	CPW > 0.448, 
+    	RW > -0.311,
+        (  
+        	SW =< -1.396 ->  
+        	D = 'B'
+        ;   
+        	D = 'M'
+        )
+    ).
