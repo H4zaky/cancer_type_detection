@@ -1,13 +1,26 @@
 %amostra(ID, CPW, AW, RW, PW, TW, SM, SW, FDS, TS, TM, CS, PS, SS, PM).
 amostra(1, 0.448, 0.137, -0.311, 0.04, -0.821, 2.929, -1.396, -0.935, -0.522, -0.907, -0.429, -0.072, -0.486, 0.184).
 
+%Este Funciona
 diagnostico(ID, D) :-
     amostra(ID, CPW, AW, _, _, TW, _, _, _, _, _, _, _, _, _),
     (  
-    	CPW =< 0.488,
+    	CPW =< 0.448,
         AW =< 0.137,
         TW =< -0.821 ->  
     	D = 'B' 
+    ;   
+    	D = 'M'
+    ).
+
+%Este Funciona
+diagnostico(ID, D) :-
+    amostra(ID, CPW, _, RW, _, _, SM, _, _, _, _, _, _, _, _),
+    (  
+    	CPW > 0.448,
+        RW =< -0.311,
+        SM =< 2.929 ->  
+    	D = 'B'
     ;   
     	D = 'M'
     ).
