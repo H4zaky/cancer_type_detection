@@ -1,40 +1,119 @@
 %amostra(ID, CPW, AW, RW, PW, TW, SM, SW, FDS, TS, TM, CS, PS, SS, PM).
-amostra(1, 0.448, 0.137, -0.311, 0.04, -0.821, 2.929, -1.396, -0.935, -0.522, -0.907, -0.429, -0.072, -0.486, 0.184).
+amostra(1, 0.448, 0.137, -0.311, 0.04, 1.163, 2.929, -1.396, -0.959, -0.522, -0.907, -0.429, -0.072, -0.486, 0.186).
 
-%Este Funciona
+diagnostico(ID, D) :-
+    amostra(ID, CPW, AW, _, PW, _, _, _, FDS, _, _, _, _, _, _),
+        CPW =< 0.448,
+        AW =< 0.137,
+        PW =< 0.04,
+        FDS =< -0.958,
+        D = 'B'.
+    
+diagnostico(ID, D) :-
+    amostra(ID, CPW, AW, _, PW, _, _, _, FDS, _, _, _, _, _, _),
+        CPW =< 0.448,
+        AW =< 0.137,
+        PW =< 0.04,
+        FDS > -0.958,
+        D = 'M'.
+
+diagnostico(ID, D) :-
+    amostra(ID, CPW, AW, _, PW, TW, _, _, FDS, _, _, _, _, _, _),
+    CPW =< 0.448,
+    AW =< 0.137,
+    PW =< 0.04,
+    FDS > -0.935,
+    TW =< 1.161,
+    D = 'B'.
+
+diagnostico(ID, D) :-
+    amostra(ID, CPW, AW, _, PW, TW, _, _, FDS, _, TM, _, _, _, _),
+    CPW =< 0.448,
+    AW =< 0.137,
+    PW =< 0.04,
+    FDS > -0.935,
+    TW > 1.161,
+    TM =< 0.88,
+    D = 'M'.
+
+diagnostico(ID, D) :- 
+	amostra(ID, CPW, AW, _, PW, TW, _, _, FDS, _, TM, _, _, _, _),
+    CPW =< 0.448,
+    AW =< 0.137,
+    PW =< 0.04,
+    FDS > -0.935,
+    TW > 1.161,
+    TM > 0.88,
+    D = 'M'.
+
+diagnostico(ID, D) :-
+    amostra(ID, CPW, AW, _, PW, _, _, _, _, TS, _, CS, _, _, PM),
+    CPW =< 0.448,
+    AW =< 0.137,
+    PW > 0.04,
+    TS =< -0.522,
+    CS =< -0.429,
+    PM =< 0.186,
+    D = 'M'.
+
+diagnostico(ID, D) :-
+    amostra(ID, CPW, AW, _, PW, _, _, _, _, TS, _, CS, _, _, PM),
+    CPW =< 0.448,
+    AW =< 0.137,
+    PW > 0.04,
+    TS =< -0.522,
+    CS =< -0.429,
+    PM > 0.186,
+    D = 'B'.
+
+diagnostico(ID, D) :-
+    amostra(ID, CPW, AW, _, PW, _, _, _, _, TS, _, CS, _, _, _),
+    CPW =< 0.448,
+    AW =< 0.137,
+    PW > 0.04,
+    TS =< -0.522,
+    CS > -0.429,
+    D = 'B'.
+
+diagnostico(ID, D) :-
+    amostra(ID, CPW, AW, _, PW, _, _, _, _, TS, _, _, PS, _, _),
+    CPW =< 0.448,
+    AW =< 0.137,
+    PW > 0.04,
+    TS > -0.522,
+    PS > -0.072,
+    D = 'M'.
+
+diagnostico(ID, D) :-
+    amostra(ID, CPW, AW, RW, PW, _, _, _, _, TS, _, _, PS, _, _),
+    CPW =< 0.448,
+    AW =< 0.137,
+    PW > 0.04,
+    TS > -0.522,
+    PS =< -0.072,
+    RW =< 0.124,
+    D = 'B'.
+
+diagnostico(ID, D) :-
+    amostra(ID, CPW, AW, RW, PW, _, _, _, _, TS, _, _, PS, _, _),
+    CPW =< 0.448,
+    AW =< 0.137,
+    PW > 0.04,
+    TS > -0.522,
+    PS =< -0.072,
+    RW > 0.124,
+    D = 'M'.
+
 diagnostico(ID, D) :-
     amostra(ID, CPW, AW, _, _, TW, _, _, _, _, _, _, _, _, _),
-    (  
-    	CPW =< 0.448,
-        AW =< 0.137,
-        TW =< -0.821 ->  
-    	D = 'B' 
-    ;   
-    	D = 'M'
-    ).
-
-%Este Funciona
-diagnostico(ID, D) :-
-    amostra(ID, CPW, _, RW, _, _, SM, _, _, _, _, _, _, _, _),
-    (  
-    	CPW > 0.448,
-        RW =< -0.311,
-        SM =< 2.929 ->  
-    	D = 'B'
-    ;   
-    	D = 'M'
-    ).
+    CPW =< 0.448,
+    AW > 0.137,
+    TW =< -0.821,
+    D = 'B'.
 
 diagnostico(ID, D) :-
-    %amostra(ID, CPW, _, RW, _, _, _, SW, _, _, TM, _, _, SS, _),
-    amostra(ID, CPW, _, RW, _, _, _, SW, _, _, _, _, _, _, _),
-    (  
-    	CPW > 0.448, 
-    	RW > -0.311,
-        (  
-        	SW =< -1.396 ->  
-        	D = 'B'
-        ;   
-        	D = 'M'
-        )
-    ).
+    amostra(ID, CPW, AW, _, _, TW, _, _, _, _, _, _, _, _, _),
+    CPW =< 0.448,
+    AW > 0.137,
+    TW > -0.821,
+    D = 'M'.
