@@ -7,6 +7,18 @@ amostra(2, 0.448, 0.137, 0.04, -0.522, -0.429, 0.186).
 %amostra(ID, CPW, AW, PW, TS, PS, RW).
 amostra(3, 0.448, 0.137, 0.04, -0.522, -0.072, 0.124).
 
+%amostra(ID, CPW, AW, PW, FDS, TW, TM).
+amostra(4, 0.448, 0.137, 0.04, -0.935, 1.161, 0.88).
+
+%amostra(ID, CPW, AW, PW, FDS).
+amostra(5, 0.448, 0.137, 0.04, -0.958).
+
+%amostra(ID, CPW, RW, SM).
+amostra(6, 0.450, -0.311, 2.929).
+
+%amostra(ID, CPW, RW, SW, TM, SS).
+amostra(7, 0.450, -0.300, -1.390, -0.907, -0.486).
+
 diagnostico1(ID, D) :- 
     amostra(ID, CPW, AW, TW),
     CPW =< 0.448,
@@ -52,7 +64,66 @@ diagnostico3(ID, D) :-
         D = 'M'
     ).
 
+diagnostico4(ID, D) :-
+    amostra(ID, CPW, AW, PW, FDS, TW, TM),
+    CPW =< 0.448,
+    AW =< 0.137,
+    PW =< 0.04,
+    FDS =< -0.935,
+    (
+        TW =< 1.161 ->
+        D = 'B'
+    ;
+        TM =< 0.88 ->
+        D = 'B'
+    ;
+        D = 'M'
+    ).
 
+diagnostico5(ID, D) :-
+    amostra(ID, CPW, AW, PW, FDS),
+    CPW =< 0.448,
+    AW =< 0.137,
+    PW =< 0.04,
+    (
+        FDS =< -0.958 ->
+        D = 'B'
+    ;
+        D = 'M'
+    ).
+
+diagnostico6(ID, D) :-
+    amostra(ID, CPW, RW, SM),
+    CPW > 0.448,
+    RW =< -0.311,
+    (   
+    	SM =< 2.929 ->
+    	D = 'B'
+    ;   
+    	D = 'M'
+    ).
+
+diagnostico7(ID, D) :-
+    amostra(ID, CPW, RW, SW, TM, SS),
+    CPW > 0.448,
+    RW > -0.311, 
+    ( 
+    	SW =< -1.396 ->  
+    	D = 'B'
+    ;   
+    	(   
+        	TM > -0.907 ->  
+        	D = 'M'
+        ;   
+        
+        	SS =< -0.486 ->  
+        	D = 'B'
+        ;   
+        	D = 'M'
+        )
+    ).
+
+    
 
 
 
@@ -61,5 +132,4 @@ diagnostico3(ID, D) :-
     
 	
     
-
 
