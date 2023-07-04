@@ -26,8 +26,8 @@ print(f'Total # of sample in test dataset: {len(X_test)}')
 
 sc = StandardScaler()
 
-X_train = sc.fit_transform(X_train)
-X_test = sc.transform(X_test)
+#X_train = sc.fit_transform(X_train)
+#X_test = sc.transform(X_test)
 
 trainScores = []
 validationScores = []
