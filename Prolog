@@ -30,23 +30,33 @@ diagnostico(ID, D) :-
     D = 'M'.
 
 diagnostico(ID, D) :-
-	amostra(ID, CPW, RW, PW, _, _, _, SS, _, _, _),
+	amostra(ID, CPW, RW, PW, TW, _, _, SS, _, _, _),
 	CPW =< 0.145,
     RW =< 17.72,
     PW =< 108.25,
-    SS =< 0.003,
-    SM > 0.176,
+    SS > 0.003,
+    TW =< 33.105,
+    D = 'B'.
+
+diagnostico(ID, D) :-
+	amostra(ID, CPW, RW, PW, TW, _, _, SS, TM, _, _),
+	CPW =< 0.145,
+    RW =< 17.72,
+    PW =< 108.25,
+    SS > 0.003,
+    TW > 33.105,
+    TM =< 23.2
     D = 'M'.
 
 diagnostico(ID, D) :-
-    amostra(ID, CPW, AW, _, PW, TW, _, _, FDS, _, TM, _, _, _, _),
-    CPW =< 0.448,
-    AW =< 0.137,
-    PW =< 0.04,
-    FDS > -0.935,
-    TW > 1.161,
-    TM =< 0.88,
-    D = 'M'.
+	amostra(ID, CPW, RW, PW, TW, _, _, SS, TM, _, _),
+	CPW =< 0.145,
+    RW =< 17.72,
+    PW =< 108.25,
+    SS > 0.003,
+    TW > 33.105,
+    TM > 23.2
+    D = 'B'.
 
 diagnostico(ID, D) :- 
 	amostra(ID, CPW, AW, _, PW, TW, _, _, FDS, _, TM, _, _, _, _),
@@ -57,125 +67,3 @@ diagnostico(ID, D) :-
     TW > 1.161,
     TM > 0.88,
     D = 'M'.
-
-diagnostico(ID, D) :-
-    amostra(ID, CPW, AW, _, PW, _, _, _, _, TS, _, CS, _, _, PM),
-    CPW =< 0.448,
-    AW =< 0.137,
-    PW > 0.04,
-    TS =< -0.522,
-    CS =< -0.429,
-    PM =< 0.186,
-    D = 'M'.
-
-diagnostico(ID, D) :-
-    amostra(ID, CPW, AW, _, PW, _, _, _, _, TS, _, CS, _, _, PM),
-    CPW =< 0.448,
-    AW =< 0.137,
-    PW > 0.04,
-    TS =< -0.522,
-    CS =< -0.429,
-    PM > 0.186,
-    D = 'B'.
-
-diagnostico(ID, D) :-
-    amostra(ID, CPW, AW, _, PW, _, _, _, _, TS, _, CS, _, _, _),
-    CPW =< 0.448,
-    AW =< 0.137,
-    PW > 0.04,
-    TS =< -0.522,
-    CS > -0.429,
-    D = 'B'.
-
-diagnostico(ID, D) :-
-    amostra(ID, CPW, AW, _, PW, _, _, _, _, TS, _, _, PS, _, _),
-    CPW =< 0.448,
-    AW =< 0.137,
-    PW > 0.04,
-    TS > -0.522,
-    PS > -0.072,
-    D = 'M'.
-
-diagnostico(ID, D) :-
-    amostra(ID, CPW, AW, RW, PW, _, _, _, _, TS, _, _, PS, _, _),
-    CPW =< 0.448,
-    AW =< 0.137,
-    PW > 0.04,
-    TS > -0.522,
-    PS =< -0.072,
-    RW =< 0.124,
-    D = 'B'.
-
-diagnostico(ID, D) :-
-    amostra(ID, CPW, AW, RW, PW, _, _, _, _, TS, _, _, PS, _, _),
-    CPW =< 0.448,
-    AW =< 0.137,
-    PW > 0.04,
-    TS > -0.522,
-    PS =< -0.072,
-    RW > 0.124,
-    D = 'M'.
-
-diagnostico(ID, D) :-
-    amostra(ID, CPW, AW, _, _, TW, _, _, _, _, _, _, _, _, _),
-    CPW =< 0.448,
-    AW > 0.137,
-    TW =< -0.821,
-    D = 'B'.
-
-diagnostico(ID, D) :-
-    amostra(ID, CPW, AW, _, _, TW, _, _, _, _, _, _, _, _, _),
-    CPW =< 0.448,
-    AW > 0.137,
-    TW > -0.821,
-    D = 'M'.
-
-diagnostico(ID, D) :-
-    amostra(ID, CPW, _, RW, _, _, SM, _, _, _, _, _, _, _, _),
-    CPW > 0.448,
-    RW =< -0.311,
-    SM =< 2.929,
-    D = 'B'.
-   
-diagnostico(ID, D) :-
-    amostra(ID, CPW, _, RW, _, _, SM, _, _, _, _, _, _, _, _),
-    CPW > 0.448,
-    RW =< -0.311,
-    SM > 2.929,
-    D = 'M'.
-
-diagnostico(ID, D) :-
-    amostra(ID, CPW, _, RW, _, _, _, SW, _, _, _, _, _, _, _),
-    CPW > 0.448,
-    RW > -0.311,
-    SW =< -1.396,
-    D = 'B'.
-
-diagnostico(ID, D) :-
-    amostra(ID, CPW, _, RW, _, _, _, SW, _, _, TM, _, _, _, _),
-    CPW > 0.448,
-    RW > -0.311,
-    SW > -1.396,
-    TM > -0.907,
-    D = 'M'.
-
-diagnostico(ID, D) :-
-    amostra(ID, CPW, _, RW, _, _, _, SW, _, _, TM, _, _, SS, _),
-    CPW > 0.448,
-    RW > -0.311,
-    SW > -1.396,
-    TM =< -0.907,
-    SS =< -0.486,
-    D = 'B'.
-
-diagnostico(ID, D) :-
-    amostra(ID, CPW, _, RW, _, _, _, SW, _, _, TM, _, _, SS, _),
-    CPW > 0.448,
-    RW > -0.311,
-    SW > -1.396,
-    TM =< -0.907,
-    SS > -0.486,
-    D = 'M'.
-
-    
-    
