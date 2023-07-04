@@ -141,4 +141,35 @@ diagnostico(ID, D) :-
     COMPACT_S > 0.041,
     D = 'B'.
     
+diagnostico(ID, D) :- 
+	amostra(ID, CPW, RW, _, _, _, FDS, _, _, _, _),
+    CPW > 0.145,
+    RW > 14.65,
+    FDS > 0.012,
+    D = 'B'.
+
+diagnostico(ID, D) :- 
+	amostra(ID, CPW, RW, _, _, _, FDS, _, TM, _, _),
+    CPW > 0.145,
+    RW > 14.65,
+    FDS =< 0.012,
+    TM > 15.345,
+    D = 'M'.
     
+diagnostico(ID, D) :- 
+	amostra(ID, CPW, RW, _, _, _, FDS, _, TM, _, CONCAVITY_S),
+    CPW > 0.145,
+    RW > 14.65,
+    FDS =< 0.012,
+    TM =< 15.345,
+    CONCAVITY_S > 0.033,
+    D = 'M'.
+
+diagnostico(ID, D) :- 
+	amostra(ID, CPW, RW, _, _, _, FDS, _, TM, _, CONCAVITY_S),
+    CPW > 0.145,
+    RW > 14.65,
+    FDS =< 0.012,
+    TM =< 15.345,
+    CONCAVITY_S =< 0.033,
+    D = 'B'.
