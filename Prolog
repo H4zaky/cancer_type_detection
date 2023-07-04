@@ -45,7 +45,7 @@ diagnostico(ID, D) :-
     PW =< 108.25,
     SS > 0.003,
     TW > 33.105,
-    TM =< 23.2
+    TM =< 23.2,
     D = 'M'.
 
 diagnostico(ID, D) :-
@@ -55,15 +55,90 @@ diagnostico(ID, D) :-
     PW =< 108.25,
     SS > 0.003,
     TW > 33.105,
-    TM > 23.2
+    TM > 23.2,
     D = 'B'.
 
 diagnostico(ID, D) :- 
-	amostra(ID, CPW, AW, _, PW, TW, _, _, FDS, _, TM, _, _, _, _),
-    CPW =< 0.448,
-    AW =< 0.137,
-    PW =< 0.04,
-    FDS > -0.935,
-    TW > 1.161,
-    TM > 0.88,
+	amostra(ID, CPW, RW, PW, TW, _, _, _, TM, _, _),
+    CPW =< 0.145,
+    RW =< 17.72,
+    PW > 110.85,
+    TW =< 26.58,
+    TM =< 16.265,    
     D = 'M'.
+
+diagnostico(ID, D) :- 
+	amostra(ID, CPW, RW, PW, TW, _, _, _, TM, _, _),
+    CPW =< 0.145,
+    RW =< 17.72,
+    PW > 110.85,
+    TW =< 26.58,
+    TM > 16.265,    
+    D = 'B'.
+
+diagnostico(ID, D) :- 
+	amostra(ID, CPW, RW, PW, TW, _, _, _, _, _, _),
+    CPW =< 0.145,
+    RW =< 17.72,
+    PW > 110.85,
+    TW =< 26.58,    
+    D = 'B'.
+
+diagnostico(ID, D) :- 
+	amostra(ID, CPW, RW, PW, TW, _, FDS, _, _, _, _),
+    CPW =< 0.145,
+    RW =< 17.72,
+    PW > 108.25,
+    TW > 26.58,
+    FDS =< 0.004,    
+    D = 'M'.
+
+diagnostico(ID, D) :- 
+	amostra(ID, CPW, RW, PW, TW, _, FDS, _, TM, _, _),
+    CPW =< 0.145,
+    RW =< 17.72,
+    PW > 108.25,
+    TW > 26.58,
+    FDS > 0.004,
+    TM =< 21.915,
+    D = 'M'.
+
+diagnostico(ID, D) :- 
+	amostra(ID, CPW, RW, PW, TW, _, FDS, _, TM, _, _),
+    CPW =< 0.145,
+    RW =< 17.72,
+    PW > 108.25,
+    TW > 26.58,
+    FDS > 0.004,
+    TM > 21.915,
+    D = 'B'.
+
+diagnostico(ID, D) :- 
+	amostra(ID, CPW, RW, _, TW, _, _, _, _, _, _),
+    CPW =< 0.145,
+    RW > 17.72,
+    TW =< 20.725,
+    D = 'B'.
+
+diagnostico(ID, D) :- 
+	amostra(ID, CPW, RW, _, TW, _, _, _, _, _, _),
+    CPW =< 0.145,
+    RW > 17.72,
+    TW > 20.725,
+    D = 'M'.
+
+diagnostico(ID, D) :- 
+	amostra(ID, CPW, RW, _, _, COMPACT_S, _, _, _, _, _),
+    CPW > 0.145,
+    RW =< 14.65,
+    COMPACT_S =< 0.041,
+    D = 'M'.
+
+diagnostico(ID, D) :- 
+	amostra(ID, CPW, RW, _, _, COMPACT_S, _, _, _, _, _),
+    CPW > 0.145,
+    RW =< 14.65,
+    COMPACT_S > 0.041,
+    D = 'B'.
+    
+    
